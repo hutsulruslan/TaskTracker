@@ -34,7 +34,7 @@ public class Main {
                 }
                 case "update" -> {
                     if(commandArgs.length<2) {
-                        System.out.println("Usage: update <id> <description>");
+                        System.out.println("Usage: delete <id>");
                     }
                     else {
                         String[] updateArgs = commandArgs[1].split(" ", 2);
@@ -45,11 +45,35 @@ public class Main {
                         }
                     }
                 }
+                case "mark-in-progress" -> {
+                    if(commandArgs.length<2) {
+                        System.out.println("Usage: mark-in-progress <id>");
+                    }
+                    else {
+                        taskManager.markTask(Integer.parseInt(commandArgs[1]), "in-progress");
+                    }
+                }
+                case "mark-done" -> {
+                    if(commandArgs.length<2) {
+                        System.out.println("Usage: mark-done <id>");
+                    }
+                    else {
+                        taskManager.markTask(Integer.parseInt(commandArgs[1]), "done");
+                    }
+                }
+                case "delete" -> {
+                    if(commandArgs.length<2) {
+                        System.out.println("Usage: update <id> <description>");
+                    }
+                    else {
+                        taskManager.deleteTask(Integer.parseInt(commandArgs[1]));
+                    }
+                }
                 case "list" -> {
                     if (commandArgs.length < 2) {
-                        taskManager.listTasks(null);
+                        taskManager.listTasks();
                     } else {
-                        taskManager.listTasks(commandArgs[1]);
+                        taskManager.listFilteredTasks(commandArgs[1]);
                     }
                 }
                 case "help" -> {
@@ -59,9 +83,10 @@ public class Main {
                     System.out.println("3. delete <id>");
                     System.out.println("4. mark-in-progress <id>");
                     System.out.println("5. mark-done <id>");
-                    System.out.println("6. list [status]");
-                    System.out.println("7. help");
-                    System.out.println("8. exit");
+                    System.out.println("6. list");
+                    System.out.println("7. list [status]");
+                    System.out.println("8. help");
+                    System.out.println("9. exit");
                 }
                 case "exit" -> {
                     System.out.println("Exiting program...");
